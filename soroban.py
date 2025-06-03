@@ -3,7 +3,11 @@
 """
 Bead-by-bead Soroban animation with Rich.
 
-• Each bead moves individually (0.2 s between moves).
+to run, you need to:
+
+    pip install rich
+
+• Each bead moves individually (0.5 s between moves).
 • After finishing a column, the animation pauses 0.5 s.
 • If that column created a carry, a second 0.5 s pause is added.
 • Uses Rich.Live to keep one abacus “in place” on the screen.
@@ -17,7 +21,8 @@ from rich.panel import Panel
 BEAD = "⬬"     # active bead (single-width, looks good in most fonts)
 ROD  = "|"      # gap symbol, ASCII single-width
 PER_BEAD_PAUSE = 0.5  # seconds to pause between moving individual beads
-PER_COLUMN_PAUSE = 0.75 # Seconds to pause between columns
+PER_COLUMN_PAUSE = 0.5 # Seconds to pause between columns
+PER_CARRY_PAUSE = 0.75
 # ────────────────────────────────────────────────────────────────
 #  Render Soroban for an integer given as zero-padded string
 # ────────────────────────────────────────────────────────────────
@@ -94,7 +99,7 @@ def animate_add(a: int, b: int) -> None:
             # finished this column
             time.sleep(PER_COLUMN_PAUSE)
             if carry:                        # extra pause if carry created
-                time.sleep(PER_COLUMN_PAUSE)
+                time.sleep(PER_CARRY_PAUSE)
 
         # final display stays for a moment
         live.update(panel())
