@@ -173,10 +173,10 @@ def find_pi_approximation_to_d_digits(k, D):
         # Generate the continued fraction for π^k. We may need more terms if
         # the initial convergents are not accurate enough.
         cf = get_continued_fraction(target_value, max_terms=num_terms)
-        
+
         # Calculate all convergents for this set of coefficients.
         convergents = list(get_convergents(cf))
-        
+
         # We only need to check the last (and most accurate) convergent.
         p, q = convergents[-1]
 
@@ -199,7 +199,7 @@ def find_pi_approximation_to_d_digits(k, D):
                 "pi_approximation": pi_approx,
                 "error": error
             }
-        
+
         # If not accurate enough, increase the number of terms and try again.
         num_terms += 1
         # To prevent an infinite loop in case of issues, let's add a limit.
@@ -243,7 +243,7 @@ if __name__ == "__main__":
     for k_val in [4, 5, 6, 7]:
         print(f"Searching for k = {k_val}...")
         result = find_pi_approximation_to_d_digits(k=k_val, D=8)
-        
+
         # *** BUG FIX ***
         # The original code had a flawed check here. A successful result also
         # contains the key "error" (with a float value), which caused a
@@ -256,7 +256,7 @@ if __name__ == "__main__":
             q = result['convergent_q']
             approx = result['pi_approximation']
             err = result['error']
-            
+
             print(f"  > Found for π^{k_val}: p={p}, q={q}")
             print(f"  > π ≈ ({p}/{q})^(1/{k_val})")
             print(f"  > Approximation: {approx:.12f}")
