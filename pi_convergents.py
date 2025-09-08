@@ -244,13 +244,6 @@ if __name__ == "__main__":
         print(f"Searching for k = {k_val}...")
         result = find_pi_approximation_to_d_digits(k=k_val, D=8)
 
-        # *** BUG FIX ***
-        # The original code had a flawed check here. A successful result also
-        # contains the key "error" (with a float value), which caused a
-        # TypeError.
-        # The corrected logic now checks for a key that ONLY exists in a
-        # successful result dictionary ('convergent_p') to distinguish it
-        # from a failure.
         if 'convergent_p' in result:
             p = result['convergent_p']
             q = result['convergent_q']
